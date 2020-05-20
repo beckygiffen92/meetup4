@@ -1,0 +1,123 @@
+.btn-right{
+    float: right;
+}
+.window{ /* the size of my window is like 100%*/
+    height: 100%;
+  }
+  a{
+    margin-left: 40%;
+    color: #EDF2F4!important;
+  }
+  a:hover{
+    color: black!important;
+    font-display: none;
+    
+  }
+  body{
+    padding: 20px;
+    background-color:  #EE4266;
+    font-family: 'Poppins';
+}
+
+input{
+  border-radius: 7.5px;
+  border-color: none;
+  background-color: #EDF2F4;
+}
+
+#btnSignUp, #btnSignIn, #saveMyRota{
+  background-color: #BEEF9E;
+  color: black;
+  align-content: center;
+  text-align: center;
+
+}
+
+#editMyRota{
+  background-color: #7067CF;
+  color: black;
+  align-content: center;
+  text-align: center;
+
+}
+
+
+#meetupLogo, #myRotaLogo, #myFriendsLogo, #myMeetsLogo, #myGroupsLogo{
+  margin-left:40%;
+  width: 20vw;
+}
+
+form{
+  margin-left: 40%;
+  
+}
+
+h1{
+  text-align: center;
+  color: #EDF2F4;
+  font-weight: bold;
+  font-size: 2vw;
+}
+h2{
+  font-size: 1vw;
+  color: #EDF2F4!important;
+}
+
+.btn{
+  align-content: center;
+  text-align: center;
+}
+
+
+ul {list-style-type: none;}
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #EDF2F4;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 10vw;
+  color: #3454D1;
+  font-weight: bold;
+  text-align: center;
+}
+
+ul {list-style-type: none;}
+.myHomeMenu {
+  margin: 0;
+}
+.myHomeMenu li{
+  margin: 0;
+  display: inline-block;
+  width: 10vw;
+}
+
+#myMeetsButton, #myRotaButton, #myFriendsButton, #myGroupsButton, #myAddNewButton, #addNewGroupButton{
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 10vw;
+}
+
+ul {list-style-type: none;}
+.myPersonalGroups {
+  margin: 0;
+}
+.myPersonalGroups li{
+  margin: 0;
+  display: inline-block;
+  width: 10vw;
+}
+@media (min-width: 768px)
+{.container {
+    max-width: 720px;
+}}
+
+p{
+  position: absolute;
+}
+.container{
+  position: relative;
+}
+

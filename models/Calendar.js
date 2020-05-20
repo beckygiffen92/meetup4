@@ -2,18 +2,17 @@ const mongoose = require('mongoose');
 
 //A scheme is used to structure data, here we make a structure based around the form that is going
 //to be used in our front end files, so that we can save that data to our database.
-const ContactSchema = new mongoose.Schema({
-    user: {
-        type: String
-        
-    },
-    name: {
+const CalendarSchema = new mongoose.Schema({
+    selectType: {
         type: String
     },
-    email: {
+    selectDate: {
+        type: Date
+    },
+    startTime: {
         type: String
     },
-    number: {
+    endTime: {
         type: String
     },
     date: {
@@ -22,4 +21,4 @@ const ContactSchema = new mongoose.Schema({
     }
 });
 //We use module.exports to 'expose' this module, so that we can call it in different files of pur project
-module.exports = Contact = mongoose.model('contact', ContactSchema);
+module.exports = User = mongoose.model('calendar', UserSchema);
