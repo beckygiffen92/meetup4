@@ -13,8 +13,8 @@
 <form action="/addUserToGroup" method= "POST">
 <input type ="text"name ="newGroupName">
   {{#each contacts}}
-  <input type="checkbox" name="{{this.id}}" value="{{this.email}}">
-  <label for="{{this.id}}"> {{this.email}} </label><br>
+  <input type="checkbox" name="members" value="{{this.email}}">
+  <label for="members"> {{this.email}} </label><br>
   {{/each}}
   
   <input type="submit" value="Add" id = "addGroupToDB">

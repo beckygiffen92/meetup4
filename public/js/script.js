@@ -10,6 +10,7 @@ const btnAddFriend = document.querySelector('#btnAddFriend');
 const friendsEmail = document.querySelector('#friendsEmail');
 
 const addGroupToDB = document.querySelector('#addGroupToDB');
+const newGroupName = document.querySelector('#newGroupName');
 
 //vars for choosing work or OTHER on each day
 const chooseWorkMon = document.querySelector('#chooseWorkMon');
@@ -107,3 +108,13 @@ if(typeof (btnAddFriend) != 'undefined' && btnAddFriend != null ){
     }
     });
     }
+
+    if(typeof (addGroupToDB) != 'undefined' && addGroupToDB != null ){
+        addGroupToDB.addEventListener('click', (e) => {
+        if (newGroupName.value === "")  {
+            e.preventDefault();
+            window.alert('Oops! You need to enter a name for your new group!');
+        }
+    });
+    }
+    

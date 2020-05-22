@@ -16,6 +16,9 @@ const port = process.env.PORT || 3000;
 
 const { isAuth } = require('./middleware/isAuth');
 const { Search } = require('./middleware/Search');
+
+//const { friendIsAdded } = require('./middleware/friendIsAdded');
+//const { groupIsAdded } = require('./middleware/groupIsAdded');
 require('./middleware/passport')(passport);
 
 const Contact = require('./models/Contact');
@@ -161,6 +164,23 @@ app.get('/addNewGroup', (req, res) => {
 
 })
 
+app.post('/addNewGroup', async (req, res)=>{
+    try {
+        const { groupName, members } = req.body;
+        const newGroup = {
+            groupName, members
+        }
+        const user = await User.findOne({user: req.user.id})
+        user.contactGroups.unshift(newGroup)
+        await user.save()
+        res.redirect('/mygroups')
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+
+})
+
 //POST Signup
 app.post('/signup', async (req, res) => {
     const { username, personalisedName, password } = req.body;
@@ -213,6 +233,23 @@ app.post('/addFriend', (req, res) => {
 
         contact.save()
         res.redirect('/home?contactSaved');
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+
+})
+
+app.get('/addFriend', (req, res) => {
+    try {
+        Contact.find({  }).lean()
+        .exec((err, contacts) => {
+            if (contacts.length) {
+                res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: true });
+            } else {
+                res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: false });
+            }})
+
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server Error')
