@@ -11,6 +11,8 @@ const friendsEmail = document.querySelector('#friendsEmail');
 
 const addGroupToDB = document.querySelector('#addGroupToDB');
 const newGroupName = document.querySelector('#newGroupName');
+const members = document.querySelector('#members');
+const groupName = document.querySelector('#groupName');
 
 //vars for choosing work or OTHER on each day
 const chooseWorkMon = document.querySelector('#chooseWorkMon');
@@ -84,6 +86,9 @@ if(queryString == '?incorrectLogin'){
 if(queryString == '?contactSaved'){
     messageContainer.innerHTML =`<div class ="card-panel red">Contact Saved</div`
 }
+if(queryString == '?groupSaved'){
+    messageContainer.innerHTML =`<div class ="card-panel red">Group Saved</div`
+}
 /*function searchForFriend() {
     var input, filter, ul, li, a, i, txtValue;
     input = document.getElementById("searchForContact");
@@ -117,4 +122,15 @@ if(typeof (btnAddFriend) != 'undefined' && btnAddFriend != null ){
         }
     });
     }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+    
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            plugins: ['dayGrid']
+        });
+    
+        calendar.render();
+    });
+
     
