@@ -12,13 +12,10 @@ const session = require('express-session');
 
 
 const port = process.env.PORT || 3000;
-//const mongoURL = process.env.mongoURL || 'mongodb://localhost:27017/handlebars'
+//const mongoURL = process.env.mongoURL || 'mongodb://localhost:27017/meetup'
 
 const { isAuth } = require('./middleware/isAuth');
-const { Search } = require('./middleware/Search');
 
-//const { friendIsAdded } = require('./middleware/friendIsAdded');
-//const { groupIsAdded } = require('./middleware/groupIsAdded');
 require('./middleware/passport')(passport);
 
 const Contact = require('./models/Contact');
@@ -33,7 +30,7 @@ app.use(
         secret: 'secret',
         resave: true,
         saveUninitialized: true,
-        cookie: { maxAge:6000 }
+        cookie: { maxAge: 600000 }
     })
 );
 
@@ -50,7 +47,7 @@ app.engine('hbs', handlebars({
     layoutsDir: __dirname + '/views/layouts',
     extname: 'hbs'
 }))
-
+// when we are on localhost 3000/ the sign in page runs
 app.get('/', (req, res) => {
     try {
         res.render('signIn', { layout: 'main' });
@@ -60,43 +57,8 @@ app.get('/', (req, res) => {
     }
 
 })
-
-//Dashboard view
-app.get('/dashboard', isAuth, (req, res) => {
-    try {
-        console.log(req.user.id);
-        Contact.find({  }).lean()
-            .exec((err, contacts) => {
-                if (contacts.length) {
-                    res.render('dashboard', { layout: 'main', contacts: contacts, contactsExist: true, username: req.user.username });
-                } else {
-                    res.render('dashboard', { layout: 'main', contacts: contacts, contactsExist: false });
-                }
-            });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
-});
-
-app.get('/signout', (req, res) => {
-    //Logs the logged in user out and redirects to the sign in page
-    req.logout();
-    res.redirect('/');
-})
-
-app.get('/signup', (req, res) => {
-    try {
-        res.render('signUp', { layout: 'main' });
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
-})
-
-app.get('/home', (req, res) => {
+// when we are on the home page, we need to be log in authenticated, other wise we cannot access
+app.get('/home', isAuth, (req, res) => {
     try {
         res.render('home', { layout: 'main', personalisedName: req.user.personalisedName });
     } catch (err) {
@@ -105,7 +67,7 @@ app.get('/home', (req, res) => {
     }
 })
 
-app.get('/myrota', (req, res) => {
+app.get('/myrota', isAuth, (req, res) => {
     try {
         res.render('myrota', { layout: 'main' });
     } catch (err) {
@@ -114,15 +76,43 @@ app.get('/myrota', (req, res) => {
     }
 })
 
-app.get('/myfriends', (req, res) => {
+// we need to have access to our contact list to display them within the myfriends page. we need ot be aiuthenticated to access this page
+app.get('/myfriends', isAuth, (req, res) => {
     try {
-        res.render('myfriends', { layout: 'main' });
+        Contact.find({ user: req.user._id }).lean()
+            .exec((err, contacts) => {
+                if (contacts.length) {
+                    res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: true });
+                } else {
+                    res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: false });
+                }
+            })
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server Error')
     }
 })
-app.get('/mygroups', (req, res) => {
+
+// when the user goes to the add page, this is telling the database to create a collection called contact, and display email inside it. it is also requiring the user id so it knows what user has added it
+app.post('/addfriend', isAuth, (req, res) => {
+    //Uses destructuring to extract name, email and number from the req
+    try {
+        const { email } = req.body;
+        let contact = new Contact({
+            user: req.user._id,
+            email
+        });
+
+        contact.save()
+        res.redirect('/myfriends?friendAdded');
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+
+})
+
+app.get('/mygroups', isAuth, (req, res) => {
     try {
         res.render('mygroups', { layout: 'main' });
     } catch (err) {
@@ -130,7 +120,44 @@ app.get('/mygroups', (req, res) => {
         res.status(500).send('Server Error')
     }
 })
-app.get('/mymeets', (req, res) => {
+
+// when the user goes to the add page, this is telling the database to get a collection called groups, and display user contacts inside it. it is also requiring the user id so it knows what user has added it
+app.get('/addNewGroup', isAuth, (req, res) => {
+    try {
+        Contact.find({ user: req.user._id }).lean()
+            .exec((err, contacts) => {
+                if (contacts.length) {
+                    res.render('newgroup', { layout: 'main', contacts: contacts, contactsExist: true });
+                } else {
+                    res.render('mygroup', { layout: 'main', contacts: contacts, contactsExist: false });
+                }
+            })
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+})
+// when the user goes to the add page, this is telling the database to create a collection called contact, and display email inside it. it is also requiring the user id so it knows what user has added it
+app.post('/addNewGroup', isAuth, async (req, res) => {
+    try {
+        console.log(req.body);
+        const { newGroupName, members } = req.body;
+        const newGroup = {
+            newGroupName,
+            members
+        }
+        const user = await User.findOne({ _id: req.user.id })
+        user.contactGroups.push(newGroup)
+        await user.save()
+        res.redirect('/mygroups')
+    } catch (err) {
+        console.log(err.message);
+        res.status(500).send('Server Error')
+    }
+
+})
+
+app.get('/mymeets', isAuth, (req, res) => {
     try {
         res.render('mymeets', { layout: 'main' });
     } catch (err) {
@@ -138,7 +165,7 @@ app.get('/mymeets', (req, res) => {
         res.status(500).send('Server Error')
     }
 })
-app.get('/calendar', (req, res) => {
+app.get('/calendar', isAuth, (req, res) => {
     try {
         res.render('calendar', { layout: 'main' });
     } catch (err) {
@@ -147,33 +174,9 @@ app.get('/calendar', (req, res) => {
     }
 })
 
-app.get('/addNewGroup', (req, res) => {
+app.get('/signup', (req, res) => {
     try {
-        Contact.find({  }).lean()
-        .exec((err, contacts) => {
-            if (contacts.length) {
-                res.render('newgroup', { layout: 'main', contacts: contacts, contactsExist: true });
-            } else {
-                res.render('newgroup', { layout: 'main', contacts: contacts, contactsExist: false });
-            }})
-
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
-})
-
-app.post('/addNewGroup', async (req, res)=>{
-    try {
-        const { groupName, members } = req.body;
-        const newGroup = {
-            groupName, members
-        }
-        const user = await User.findOne({user: req.user.id})
-        user.contactGroups.unshift(newGroup)
-        await user.save()
-        res.redirect('/mygroups')
+        res.render('signUp', { layout: 'main' });
     } catch (err) {
         console.log(err.message);
         res.status(500).send('Server Error')
@@ -200,7 +203,6 @@ app.post('/signup', async (req, res) => {
         const salt = await bcrypt.genSalt(10);
         //Password Encryption using password and salt
         user.password = await bcrypt.hash(password, salt);
-
         await user.save();
         res.status(200).render('signIn', { layout: 'main', userDoesNotExist: true });
     } catch (err) {
@@ -222,111 +224,15 @@ app.post('/signin', (req, res, next) => {
 
 })
 
-
-app.post('/addFriend', (req, res) => {
-    //Uses destructuring to extract name, email and number from the req
-    const { email } = req.body;
-    try {
-        let contact = new Contact({
-            email
-        });
-
-        contact.save()
-        res.redirect('/home?contactSaved');
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
+app.get('/signout', isAuth, (req, res) => {
+    //Logs the logged in user out and redirects to the sign in page
+    req.logout();
+    res.redirect('/');
 })
 
-app.get('/addFriend', (req, res) => {
-    try {
-        Contact.find({  }).lean()
-        .exec((err, contacts) => {
-            if (contacts.length) {
-                res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: true });
-            } else {
-                res.render('myfriends', { layout: 'main', contacts: contacts, contactsExist: false });
-            }})
-
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
-})
-app.post('/addContact', (req, res) => {
-    //Uses destructuring to extract name, email and number from the req
-    const { email } = req.body;
-
-    let contact = new Contact({
-        
-        email
-    });
-
-    contact.save()
-    res.redirect('/home?contactSaved');
-})
-
-app.post('/addUserToGroup', (req, res) => {
-    //Uses destructuring to extract name, email and number from the req
-    const { email, groupName } = req.body;
-
-    let contact = new Contact({
-        
-        groupName,
-        email
-    });
-
-    contact.save()
-    res.redirect('/mygroups?groupSaved');
-})
-
-
-
-// app.post('/addContact', async (req, res) => {
-//     const { username } = req.body;
-//     try {
-//         let user = await User.findOne({ username });
-//         //If user exists stop the process and render login view with userExist true
-//         if (user) {
-//             return res.status(400).render('login', { layout: 'main', userExist: true });
-//         }
-//         //If user does not exist, then continue
-//         user = new User({
-//             username,
-           
-//         });
-//         //Salt Generation
-
-//         await user.save();
-//         res.status(200).render('myfriends', { layout: 'main', userDoesNotExist: true });
-//     } catch (err) {
-//         console.log(err.message);
-//         res.status(500).send('Server Error')
-//     }
-// })
-
-app.post('/addNewGroup', (req, res) => {
-    //Uses destructuring to extract name, email and number from the req
-    const { groupName } = req.body;
-    try {
-        let group = new Group({
-            groupName
-        });
-
-        contact.save()
-        res.redirect('/mygroups?groupSaved');
-    } catch (err) {
-        console.log(err.message);
-        res.status(500).send('Server Error')
-    }
-
-})
-
-//mongoose.conntect(mongodb://localhost:27017/handlebars')
-mongoose.connect('mongodb+srv://admin:beckypassword@cluster0-mhtdk.mongodb.net/handlebars?retryWrites=true&w=majority', {
+// database we are conntecting to
+mongoose.connect('mongodb+srv://admin:beckypassword@cluster0-mhtdk.mongodb.net/meetup?retryWrites=true&w=majority', {
+    //mongoose.connect('mongodb+srv://admin:beckypassword@cluster0-mhtdk.mongodb.net/handlebars?retryWrites=true&w=majority', {
     useUnifiedTopology: true,
     useNewUrlParser: true
 })

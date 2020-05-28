@@ -4,7 +4,8 @@ module.exports = {
             if (req.isAuthenticated()) {
                 return next();
             } else {
-                res.redirect('/signin');
+                console.log('unauthorised');
+                res.redirect('/');
             }
         } catch (err) {
             console.log(err.message);

@@ -11,6 +11,7 @@ module.exports = (passport) => {
                 username
             }).then(user => {
                 if (!user) {
+                    console.log('Sign In Success');
                     return done(null, false, { message: 'Incorrect username.' });
                 }
                 bcrypt.compare(password, user.password, (err, isMatch) => {

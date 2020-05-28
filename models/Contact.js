@@ -4,22 +4,14 @@ const mongoose = require('mongoose');
 //to be used in our front end files, so that we can save that data to our database.
 const ContactSchema = new mongoose.Schema({
     user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'users'
-        
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
     },
-    name: {
-        type: String
-    },
+
     email: {
         type: String
     },
-    groupName:{
-        type: String
-    },
-    number: {
-        type: String
-    },
+
     date: {
         type: Date,
         default: Date.now

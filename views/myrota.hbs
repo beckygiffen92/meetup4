@@ -1,20 +1,6 @@
-  <img id ="myRotaLogo"src="../images/myrota-01.png">
-        <h1 id ="date"></h1>
-        <div id="calendar"></div>
-    <div class = container>
-        <ul class = "weekdays">
-            <li>Monday</li>
-            <li>Tuesday</li>
-            <li>Wednesday</li>
-            <li>Thursday</li>
-            <li>Friday</li>
-            <li>Saturday</li>
-            <li>Sunday</li>
-        </ul>
-       
-    </div>
-    <h2>This is what your contacts can see</h2>
-    <input type ="submit"id="editMyRota" value="Edit" class ="btn waves-effect waves-light">
-    </div>
-    <input type ="submit"id="saveMyRota" value="Save" class ="btn waves-effect waves-light">
-</div>
+
+        
+        <div class="col s6">
+            {{> editRotaForm}}
+        </div>
+        {{!-- this is telling us that ut wants to access this form in the partials folder --}}

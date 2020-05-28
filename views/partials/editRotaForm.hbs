@@ -1,0 +1,136 @@
+<div class="container-fluid">
+  {{!-- here i have created a div to keep the page central and be able to apply css to --}}
+{{!-- i have created a modal below which is at the top of the page, the modal is displayed with an image which is called burgermenu and when it opens you get 4 images with the links to each page and a sign out option --}}
+<a id="myModal"data-toggle="modal" data-target="#exampleModalCenter">
+<img id ="modalburger" class="center"src="/images/burgermenubutton-01.png"></a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     <div class="row"></div>
+      <div class="modal-body d-block">
+        <div class="container-fluid">
+       <a href="/myfriends" ><img id="modalfriends"src="/images/myfriendslogo-01.png"></a>
+         <a href="/myrota" ><img id="modalrota"src="/images/myrotalogo-01.png"></a>
+   <a href="/mymeets" ><img id="modalmeets"src="/images/mymeetslogo-01.png"></a>
+           <a href="/home" ><img id="modalhome"src="/images/meeuplogo-01.png"></a>
+           <a href="/signout">SignOut</a>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div></div>
+</div>
+
+<img id ="myRotaLogo"src="/images/myrotalogo-01.png"class="center">
+<div class ="center"> 
+<form action="/editRota" method="POST">
+{{!-- this form is to add the rota to the users profile. i have created a selction date for each day and a start and finish time --}}
+
+        <div id = "userInputMonday">
+        <label id="mondayselect">Monday</label></br>
+        <select id="workOrOther">
+            <option value="chooseWorkMon">Work</option>
+            <option value="chooseOtherMon">Other</option>
+        </select>
+        <input type = "date" id = "inputDateMon"/>
+        <label id="monstart">Start Time</label>
+        <input type = "time" id = "startTimeMon"/>
+        <label id="monend">End Time</label>
+        <input type = "time" id = "endTimeMon"/> 
+        <input type ="submit"name="addMonday"id="addMonday">
+    </div>
+
+    <div id = "userInputTuesday">
+         <label id="tuesdayselect">Tuesday</label></br>
+         <select id="workOrOther">
+                <option value="chooseWorkTue">Work</option>
+                <option value="chooseOtherTue">Other</option>
+        </select>
+        <input type = "date" id = "inputDateTue"/>
+        <label id ="tuestart">Start Time</label>
+        <input type = "time" id = "startTimeTue"/>
+        <label id="tueend">End Time</label>
+        <input type = "time" id = "endTimeTue"/> 
+        <input type ="submit" name="addTuesday"id="addTuesday">
+</div>
+<div id = "userInputWednesday">
+        <label id="wedselect">Wednesday</label></br>
+        <select id="workOrOther">
+               <option value="chooseWorkWed">Work</option>
+               <option value="chooseOtherWed">Other</option>
+       </select>
+       <input type = "date" id = "inputDateWed"/>
+       <label id="wedstart">Start Time</label>
+       <input type = "time" id = "startTimeWed"/>
+       <label id="wedend">End Time</label>
+       <input type = "time" id = "endTimeWed"/> 
+       <input type ="submit" name="addWednesday"id="addWednesday">
+       
+</div>
+<div id = "userInputThursday">
+        <label id="thuselect">Thursday</label></br>
+        <select id="workOrOther">
+               <option value="chooseWorkThu">Work</option>
+               <option value="chooseOtherThu">Other</option>
+       </select>
+       <input type = "date" id = "inputDateThu"/>
+       <label id="thustart">Start Time</label>
+       <input type = "time" id = "startTimeThu"/>
+       <label id="thuend">End Time</label>
+       <input type = "time" id = "endTimeThu"/> 
+       <input type ="submit" name="addThursday"id="addThursday">
+   
+</div>
+<div id = "userInputFriday">
+        <label id="friselect">Friday</label></br>
+        <select id="workOrOther">
+               <option value="chooseWorkFri">Work</option>
+               <option value="chooseOtherFri">Other</option>
+       </select>
+       <input type = "date" id = "inputDateFri"/>
+       <label id="fristart">Start Time</label>
+       <input type = "time" id = "startTimeFri"/>
+       <label id="friEnd">End Time</label>
+       <input type = "time" id = "endTimeFri"/> 
+       <input type ="submit" name="addFriday"id="addFriday">
+      
+</div>
+<div id = "userInputSaturday">
+        <label id="satselect">Saturday</label></br>
+        <select id="workOrOther">
+               <option value="chooseWorkSat">Work</option>
+               <option value="chooseOtherSat">Other</option>
+       </select>
+       <input type = "date" id = "inputDateSat"/>
+       <label id="satstart">Start Time</label>
+       <input type = "time" id = "startTimeSat"/>
+       <label id="satend">End Time</label>
+       <input type = "time" id = "endTimeSat"/> 
+       <input type ="submit" name="addSaturday"id="addSaturday">
+       
+</div>
+<div id = "userInputSunday">
+        <label id="sunselect">Sunday</label></br>
+        <select id="workOrOther">
+               <option value="chooseWorkSun">Work</option>
+               <option value="chooseOtherSun">Other</option>
+       </select>
+       <input type = "date" id = "inputDateSun"/>
+       <label id="sunstart">Start Time</label>
+       <input type = "time" id = "startTimeSun"/>
+       <label id="sunend">End Time</label>
+       <input type = "time" id = "endTimeSun"/> 
+       <input type ="submit" name="addSunday"id="addSunday">
+</div>
+<div>
+    <input type ="submit" value="Add" name="saveWeek"id="saveWeek">
+    {{!-- here the rota will save --}}
+</div>
+</div>
+</form>

@@ -1,24 +1,52 @@
+{{!-- this is my page to add a friend --}}
+<div class="container-fluid">
+  {{!-- here i have created a div to keep the page central and be able to apply css to --}}
+{{!-- i have created a modal below which is at the top of the page, the modal is displayed with an image which is called burgermenu and when it opens you get 4 images with the links to each page and a sign out option --}}
+<a id="myModal"data-toggle="modal" data-target="#exampleModalCenter">
+<img id ="modalburger" class="center"src="/images/burgermenubutton-01.png"></a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     <div class="row"></div>
+      <div class="modal-body d-block">
+        <div class="container-fluid">
+       <a href="/myfriends" ><img id="modalfriends"src="/images/myfriendslogo-01.png"></a>
+         <a href="/myrota" ><img id="modalrota"src="/images/myrotalogo-01.png"></a>
+   <a href="/mymeets" ><img id="modalmeets"src="/images/mymeetslogo-01.png"></a>
+           <a href="/home" ><img id="modalhome"src="/images/meeuplogo-01.png"></a>
+           <a href="/signout">SignOut</a>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div></div>
+</div>
+{{!-- below is a sub logo for the page --}}
+<img id ="myFriendsLogo"src="/images/myfriendslogo-01.png"class="center">
+<div class="row"></div>
+<div class="center">
+  {{!-- this form is to add a friend --}}
 <form action="/addFriend" method="POST">
     <input type="email" name="email" id="email"placeholder="Enter Email">
     <input type="submit" value="Add" id ="btnAddFriend" class="btn waves-effect waves-light">
 </form>
- {{#each contacts}}
-  <h3 name="members" value="{{this.email}}"></h3>
-
-  {{/each}}
-  <div class="messageContainer"></div>
+</div>
+<div class="row"></div></br>
 {{#if contactsExist}}
 {{#each contacts}}
-<div class="col s12 m6 name=">
-    <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-            <span class="card-title">{{this.email}}</span>
-            <p name ="members">{{this.email}}</p>
-            <p>{{this.number}}</p>
-        </div>
-    </div>
-</div>
+        {{!-- this is a function that is saying if the user has contacts, it will display in an h2 format with the text --}}
+            <h2 name="contacts"id="h2contacts">{{this.email}}</h2>
+    
 {{/each}}
 {{else}}
 <h1>No Contacts</h1>
+{{!-- this is saying if there are no contacts, display the h1 text --}}
 {{/if}}
+
+

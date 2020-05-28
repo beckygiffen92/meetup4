@@ -12,21 +12,18 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String
     },
-        // contactGroups: [{
-        // groupName: {
-        //     type: String
-        // },
-        // members: [{
-        //     user: {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: "contacts"
-        //     }
-        // }], 
-        // date: {
-        //     type: Date,
-        //     default: Date.now
-        // }
-        // }],
+    contactGroups: [{
+        newGroupName: {
+            type: String
+        },
+        members: [{
+            type: String
+        }],
+        date: {
+            type: Date,
+            default: Date.now
+        }
+    }],
     date: {
         type: Date,
         default: Date.now

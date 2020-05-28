@@ -1,14 +1,15 @@
-<h3>Sign Up</h3>
+{{!-- here it is saying that if the text typed into username is already in the database, that sends a message to the user that they already exist.  --}}
 {{#if userExist}}
 <div class="card-panel red">Uh Oh! It appears you are already a member! Go to Log in page instead!</div>
 {{else}} {{#if userDoesNotExist}}
 <div class="card-panel green">Whoop whoop! Welcome to MeetUp!</div>
 {{/if}}{{/if}}
-<img id ="meetupLogo"src="../images/meeuplogo-01.png">
+<img id ="meetupLogo"src="../images/meeuplogo-01.png"class="center">
     
     <h1>Create Account</h1>
+    <div class="form">
     <form action="/signup" method="POST">
-        
+        {{!-- sign up page --}}
         <label for="username" style="display: block">Email Address          </br>(example@example.com</label>
         <input type ="email" name="username" id ="username" placeholder="Email Address">
         <label for="personalisedName"style="display: block">Create Username        </br>(this will be visible to contacts)</label>
@@ -16,6 +17,6 @@
         <label for="password"style="display: block">Create Password</label>
         <input type ="password" name="password" placeholder="Password"></br></br>
         <input type ="submit"style="display: block" id="signUpSubmit" value="SignUp" class ="btn waves-effect waves-light">
-    </div>
+        <a id="alreadygotacct"href="/">Already have an account?</a>
     </form>
-         <div id ="link"> <a href="/">Already have an account?</a></div>
+         </div>

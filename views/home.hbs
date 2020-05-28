@@ -1,17 +1,21 @@
 
-            <h1>Welcome back, {{personalisedName}}</h1>
+            
             <a href="/signout">Sign Out</a>
 
-    <div id="calendar"></div>
+    {{!-- <div id="calendar"></div> --}}
 
-<img id ="meetupLogo"src="/images/meeuplogo-01.png">
+<img id ="meetupLogo"src="/images/meeuplogo-01.png"class="center">
+<div class="container">
+    {{!-- here i am displaying the users personalised name when they sign in  --}}
+<h1>Hello, {{personalisedName}}!</h1>
+</div>
     
    <div class = "container">
        <ul class = "myHomeMenu">
-   <li><a href="/myrota"><img id ="myRotaButton"src="/images/myrotabtn-01.png"></a></li>
-   <li><a href="/mygroups"><img id ="myGroupsButton"src="/images/mygroupsbtn-01.png"></a></li>
-   <li><a href="/myfriends"><img id ="myFriendsButton"src="/images/myfriendsbtn.png"></a></li>
-   <li><a href="/mymeets"><img id ="myMeetsButton"src="/images/mymeetsbtn.png"></a></li>
+   <li><a href="/myrota"><img id ="myRotaButton"src="/images/myrotalogo-01.png"></a></li>
+   <li><a href="/mygroups"><img id ="myGroupsButton"src="/images/mygroupslogo-01.png"></a></li>
+   <li><a href="/myfriends"><img id ="myFriendsButton"src="/images/myfriendslogo-01.png"></a></li>
+   <li><a href="/mymeets"><img id ="myMeetsButton"src="/images/mymeetslogo-01.png"></a></li>
 
 </ul>
 </div>

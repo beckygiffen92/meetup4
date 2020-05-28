@@ -1,15 +1,21 @@
   
-
-<img id ="meetupLogo"src="../images/meeuplogo-01.png">
+{{!-- this is the sign in page for the user --}}
+<img id ="meetupLogo"src="../images/meeuplogo-01.png"class="center">
     <h1>Log in</h1>
 
+    <div class="form">
     <form action="/signin" method="POST">
         <div class="messageContainer" text-align="center"></div>
         <label for="username" style="display: block">Email Address          </br>(example@example.com)</label>
         <input type ="email" name="username" placeholder="Email Address"></br></br>
         <label for="password"style="display: block">Password</label>
         <input type ="password" name="password" placeholder="Password"></br></br>
-        <input type ="submit"style="display: block" id="btnSignIn" value="SignIn" class ="btn waves-effect waves-light">
+        <input type ="submit"style="display: block" id="btnSignIn" value="SignIn" class ="sign-in"></br>
+         
+         <a id="createaccountlink" href ="/signup">Create Account</a>
     
     </form>
-         <a href ="/signup">Create Account</a>
+    </div>
+       
+           
+   

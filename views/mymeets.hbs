@@ -1,3 +1,31 @@
-
- <img id ="myMeetsLogo"src="/images/mymeets-01.png">
+<div class="container-fluid">
+    {{!-- this page is meant to display current meetups the user would organise --}}
+  {{!-- here i have created a div to keep the page central and be able to apply css to --}}
+{{!-- i have created a modal below which is at the top of the page, the modal is displayed with an image which is called burgermenu and when it opens you get 4 images with the links to each page and a sign out option --}}
+<a id="myModal"data-toggle="modal" data-target="#exampleModalCenter">
+<img id ="modalburger" class="center"src="/images/burgermenubutton-01.png"></a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     <div class="row"></div>
+      <div class="modal-body d-block">
+        <div class="container-fluid">
+       <a href="/myfriends" ><img id="modalfriends"src="/images/myfriendslogo-01.png"></a>
+         <a href="/myrota" ><img id="modalrota"src="/images/myrotalogo-01.png"></a>
+   <a href="/mymeets" ><img id="modalmeets"src="/images/mymeetslogo-01.png"></a>
+           <a href="/home" ><img id="modalhome"src="/images/meeuplogo-01.png"></a>
+           <a href="/signout">SignOut</a>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div></div>
+</div>
+ <img id ="myMeetsLogo"src="/images/mymeetslogo-01.png"class="center">
 <h1>Upcoming MeetUps</h1>

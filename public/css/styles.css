@@ -3,9 +3,10 @@
 }
 .window{ /* the size of my window is like 100%*/
     height: 100%;
+    width:100%;
   }
   a{
-    margin-left: 40%;
+    margin-left: auto;
     color: #EDF2F4!important;
   }
   a:hover{
@@ -14,9 +15,10 @@
     
   }
   body{
-    padding: 20px;
+    padding: 5px;
     background-color:  #EE4266;
     font-family: 'Poppins';
+    font-size: 6w;
 }
 
 input{
@@ -25,12 +27,27 @@ input{
   background-color: #EDF2F4;
 }
 
-#btnSignUp, #btnSignIn, #saveMyRota{
-  background-color: #BEEF9E;
+#signUpSubmit, #btnSignIn, #saveMyRota, #addGroupToDB, #addMonday, #addTuesday,#addWednesday,#addThursday,#addFriday,#addSaturday,#addSunday{
+  background-color: #BEEF9E!important;
   color: black;
   align-content: center;
   text-align: center;
+  size: 1vw;
+transition: 0.3s ease; 
 
+}
+
+#signUpSubmit:hover{
+  transform: scale(1.5, 1.5);
+}
+#btnSignIn:hover{
+  transform: scale(1.5, 1.5);
+}
+#saveMyRota:hover{
+  transform: scale(1.5, 1.5);
+}
+#addGroupToDB:hover{
+  transform: scale(1.5, 1.5);
 }
 
 #editMyRota{
@@ -43,14 +60,16 @@ input{
 
 
 #meetupLogo, #myRotaLogo, #myFriendsLogo, #myMeetsLogo, #myGroupsLogo{
-  margin-left:40%;
+  /* margin-left:50%; */
   width: 20vw;
 }
 
-form{
-  margin-left: 40%;
+/* form{
+  margin-right: 25
+  width: 100%;
+  font-size: 1vw;
   
-}
+} */
 
 h1{
   text-align: center;
@@ -61,6 +80,13 @@ h1{
 h2{
   font-size: 1vw;
   color: #EDF2F4!important;
+  overflow: hidden;
+  max-width:40ch;
+  text-align: center;
+}
+
+#h2contacts{
+  text-align: left;
 }
 
 .btn{
@@ -98,8 +124,29 @@ ul {list-style-type: none;}
   margin-left: 10%;
   margin-right: 10%;
   width: 10vw;
+  transition: 0.3s ease; 
 }
-
+#myMeetsButton:hover{
+  transform: scale(1.5);
+}
+#myRotaButton:hover{
+  transform: scale(1.5);
+} 
+#myFriendsButton:hover{
+  transform: scale(1.5);
+} #myGroupsButton:hover{
+  transform: scale(1.5);
+}
+#myAddNewButton:hover{
+  transform: scale(1.5);
+} 
+#addNewGroupButton:hover{
+transform: scale(1.5);
+}
+#goBackButton:hover{
+  width: 2vw;
+  background: none!important;
+}
 ul {list-style-type: none;}
 .myPersonalGroups {
   margin: 0;
@@ -124,4 +171,92 @@ p{
 #calendar {
   max-width: 900px;
   margin: 40px auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+#modalburger{
+  width: 5vw;
+  margin-right: auto;
+  transition: 0.3s ease; 
+
+
+}
+
+#modalburger:hover{
+transform: scale(1.5);
+}
+
+#modalfriends, #modalgroups, #modalmeets,#modalhome,#modalrota  {
+  width: 6vw;
+  
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal-content{
+  background-color: #EE4266!important;
+  border-color: #EDF2F4;
+  border-radius: 20px;
+  border-width: 0.5vw;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+#myModal{
+  margin-left: 10%;
+  margin-right: 10%;
+  
+}
+
+#btnAddFriend{
+  background-color: #BEEF9E;
+  border-color: none;
+}
+label{
+  font-size: 1vw;
+  color: #EDF2F4;
+}
+
+text{
+  font-size: 1vw;
+  color: #EDF2F4;
+}
+input[type=checkbox] {
+  transform: scale(1.5);
+  background-color: #BEEF9E;
+}
+#createaccountlink, #alreadygotacct, #addfriendlink {
+  font-size: 1vw;
+
+  
+}
+
+div.form
+{
+    display: block;
+    text-align: center;
+}
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+
+.nav, ul{
+  list-style-type: none;
+}
+
+.topnav{
+  margin: 0px;
+  padding: 0px;
+ 
+background-color: #7067CF;
 }

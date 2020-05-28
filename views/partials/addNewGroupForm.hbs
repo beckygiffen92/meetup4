@@ -1,21 +1,59 @@
+    <div class="container-fluid">
+  {{!-- here i have created a div to keep the page central and be able to apply css to --}}
+{{!-- i have created a modal below which is at the top of the page, the modal is displayed with an image which is called burgermenu and when it opens you get 4 images with the links to each page and a sign out option --}}
+<a id="myModal"data-toggle="modal" data-target="#exampleModalCenter">
+<img id ="modalburger" class="center"src="/images/burgermenubutton-01.png"></a>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+     <div class="row"></div>
+      <div class="modal-body d-block">
+        <div class="container-fluid">
+       <a href="/myfriends" ><img id="modalfriends"src="/images/myfriendslogo-01.png"></a>
+         <a href="/myrota" ><img id="modalrota"src="/images/myrotalogo-01.png"></a>
+   <a href="/mymeets" ><img id="modalmeets"src="/images/mymeetslogo-01.png"></a>
+           <a href="/home" ><img id="modalhome"src="/images/meeuplogo-01.png"></a>
+           <a href="/signout">SignOut</a>
+      </div>
+      </div>
+      
+    </div>
+  </div>
+</div></div>
+</div>
 
+<img id ="myGroupsLogo"src="/images/mygroupslogo-01.png"class="center">
 
-    {{!-- <form action ="/addNewGroup" method="POST">
-    <input type="text" id="searchForFriend" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-
-    <input type="text" name = "name"id = "groupName" placeholder="Create Group Name">
-    <input type="search">
-    <input type="submit" value="submit" class="btn waves-effect waves-light">
-    </form> --}}
-
-<h1>Show Checkboxes</h1>
-
-<form action="/addUserToGroup" method= "POST">
-<input type ="text"name ="newGroupName">
+<div class="row"></div>
+<h1>New Group</h1>
+<div class="row"></div>
+</br></br>
+{{!-- here i am displaying a form which is allowing the user to add a new group --}}
+<div class="form">
+<form action="/addNewGroup" method= "POST">
+<label for="newGroupName" style="display: block">Group Name      </br>(example: Old Friends)</label>
+<input type ="text"name ="newGroupName" id="newGroupName" placeholder="Group Name">
+<div class="row"></div></br></br>
+<h2 id="selectGroups">Select friends to add to your group!</h2></br>
+<div class="row"></div>
+<div class="row"></div>
+{{!-- here i have a function that says each contact will be displayed as a checkbox for the user to add to the new group --}}
   {{#each contacts}}
   <input type="checkbox" name="members" value="{{this.email}}">
   <label for="members"> {{this.email}} </label><br>
   {{/each}}
-  
-  <input type="submit" value="Add" id = "addGroupToDB">
+  </br>
+ 
+  <input type="submit" value="Add" name = "addGroupToDB" id="addGroupToDB">
+  <div class="row"></div></br>
+   <a id = "addfriendlink"href="/myfriends">New friend</a>
+   {{!-- here i have given the option for the user to add a new friend first --}}
+  </div>
+ 
 </form>
+</div>

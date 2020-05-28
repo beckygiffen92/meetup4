@@ -3,6 +3,10 @@ const mongoose = require('mongoose');
 //A scheme is used to structure data, here we make a structure based around the form that is going
 //to be used in our front end files, so that we can save that data to our database.
 const RotaSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'users'
+    },
     inputDateMon: {
         type: Date
     },
@@ -66,40 +70,40 @@ const RotaSchema = new mongoose.Schema({
     endTimeSun: {
         type: String
     },
-    chooseWorkMon:{
+    chooseWorkMon: {
         type: String
     },
-    chooseWorkTue:{
+    chooseWorkTue: {
         type: String
     },
-    chooseWorkWed:{
+    chooseWorkWed: {
         type: String
     },
-    chooseWorkThu:{
+    chooseWorkThu: {
         type: String
     },
-    chooseWorkFri:{
+    chooseWorkFri: {
         type: String
     },
-    chooseWorkSat:{
+    chooseWorkSat: {
         type: String
     },
-    chooseWorkSun:{
+    chooseWorkSun: {
         type: String
     },
-    chooseOtherMon:{
+    chooseOtherMon: {
         type: String
-    },chooseOtherTue:{
+    }, chooseOtherTue: {
         type: String
-    },chooseOtherWed:{
+    }, chooseOtherWed: {
         type: String
-    },chooseOtherThu:{
+    }, chooseOtherThu: {
         type: String
-    },chooseOtherFri:{
+    }, chooseOtherFri: {
         type: String
-    },chooseOtherSat:{
+    }, chooseOtherSat: {
         type: String
-    },chooseOtherSun:{
+    }, chooseOtherSun: {
         type: String
     },
     date: {
